@@ -425,5 +425,12 @@ void il2cpp_dump(const char *outDir) {
         outStream << outPuts[i];
     }
     outStream.close();
+    // Дополнительно кладём дамп в Общий доступ, чтобы его можно было забрать без root-файлменеджера.
+    {
+        std::ofstream sdOut("/sdcard/Download/aero_dump.cs");
+        sdOut << imageOutput.str();
+        for (int i = 0; i < count; ++i) sdOut << outPuts[i];
+        sdOut.close();
+    }
     LOGI("dump done!");
 }
