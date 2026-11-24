@@ -187,6 +187,13 @@ bool NativeBridgeLoad(const char *game_data_dir, int api_level, void *data, size
 }
 
 void hack_prepare(const char *game_data_dir, void *data, size_t length) {
+    // Маркер: по нему видно, что модуль реально запустился в процессе игры.
+    {
+        FILE *f = fopen("/sdcard/Android/data/com.chaloapps.roosterrudy/files/aero_module_alive.txt", "w");
+        if (f) { fputs("alive\n", f); fclose(f); }
+        FILE *g = fopen("/data/local/tmp/aero_module_alive.txt", "w");
+        if (g) { fputs("alive\n", g); fclose(g); }
+    }
     LOGI("hack thread: %d", gettid());
     int api_level = android_get_device_api_level();
     LOGI("api level: %d", api_level);

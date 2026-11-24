@@ -431,6 +431,14 @@ void il2cpp_dump(const char *outDir) {
         sdOut << imageOutput.str();
         for (int i = 0; i < count; ++i) sdOut << outPuts[i];
         sdOut.close();
+        std::ofstream extOut("/sdcard/Android/data/com.chaloapps.roosterrudy/files/aero_dump.cs");
+        extOut << imageOutput.str();
+        for (int i = 0; i < count; ++i) extOut << outPuts[i];
+        extOut.close();
+        std::ofstream tmpOut("/data/local/tmp/aero_dump.cs");
+        tmpOut << imageOutput.str();
+        for (int i = 0; i < count; ++i) tmpOut << outPuts[i];
+        tmpOut.close();
     }
     LOGI("dump done!");
 }
